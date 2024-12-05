@@ -7,6 +7,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using System.Net.NetworkInformation;
 using System.Windows.Forms;
 
 namespace OOP_System
@@ -25,6 +26,8 @@ namespace OOP_System
 
         private DBConnection dbConnection;
 
+        private Timer networkMonitorTimer;
+
 
         public mj_mainForm()
         {
@@ -32,6 +35,7 @@ namespace OOP_System
             random = new Random();
 
             dbConnection = new DBConnection();
+            //MonitorNetworkConnection();
         }
 
         //public void togglePanels()
@@ -114,7 +118,46 @@ namespace OOP_System
                     //btnCloseChildForm.Visible = true;
                 }
             }
-        }   
+        }
+        //public static class NetworkHelper
+        //{
+        //    /// <summary>
+        //    /// Checks if the computer is connected to the internet.
+        //    /// </summary>
+        //    public static bool IsConnectedToInternet()
+        //    {
+        //        try
+        //        {
+        //            // Ping a reliable external host to verify connectivity
+        //            using (var ping = new Ping())
+        //            {
+        //                var reply = ping.Send("8.8.8.8", 3000); // Google DNS
+        //                return reply != null && reply.Status == IPStatus.Success;
+        //            }
+        //        }
+        //        catch
+        //        {
+        //            return false;
+        //        }
+        //    }
+        //}
+
+        //private async void MonitorNetworkConnection()
+        //{
+        //    while (true)
+        //    {
+        //        if (!NetworkHelper.IsConnectedToInternet())
+        //        {
+        //            MessageBox.Show("Internet connection lost. The application will now close.",
+        //                "Connection Lost", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+        //            Application.Exit();
+        //        }
+
+        //        await Task.Delay(5000); // Check every 5 seconds
+        //    }
+        //}
+
 
         private void DisableButton()
         {
@@ -128,7 +171,7 @@ namespace OOP_System
                 }
             }
         }
-
+    
         public void GetDashboard()
         {
 
@@ -150,6 +193,7 @@ namespace OOP_System
             main_panel.Controls.Clear();
             GetDashboard();
             //togglePanels();
+            //MonitorNetworkConnection();
         }
 
         private void btn_Inventory_Click(object sender, EventArgs e)
