@@ -23,7 +23,7 @@ namespace OOP_System
 
         public string MyConnection()
         {
-
+           
             con = @"Data Source=LAPTOP-DMAMJ5FJ,1433;Initial Catalog=OOP;User Id=SuperAdmin;Password=SuperAdmin;";
 
             return con;

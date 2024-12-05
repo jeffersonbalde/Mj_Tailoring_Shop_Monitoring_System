@@ -386,12 +386,23 @@ namespace OOP_System
                     cm.ExecuteNonQuery();
                     cn.Close();
 
-                    if(remain_balance <= 0)
+                    cn.Open();
+                    string query9 = "UPDATE tblPurchased SET status=@status WHERE client LIKE @client";
+                    cm = new SqlCommand(query9, cn);
+                    cm.Parameters.AddWithValue("@status", "Down Payment");
+                    cm.Parameters.AddWithValue("@client", txtCustomer.Text);
+                    cm.ExecuteNonQuery();
+                    cn.Close();
+
+                    if (remain_balance <= 0)
                     {
                         cn.Open();
-                        string query7 = "UPDATE tblPurchased SET downpayment_status=@downpayment_status WHERE client LIKE @client";
+                        string query7 = "UPDATE tblPurchased SET downpayment_status=@downpayment_status, status=@status, type_of_purchased=@type_of_purchased, date_of_payment=@date_of_payment WHERE client LIKE @client";
                         cm = new SqlCommand(query7, cn);
                         cm.Parameters.AddWithValue("@downpayment_status", "Fully Paid");
+                        cm.Parameters.AddWithValue("@status", "Paid");
+                        cm.Parameters.AddWithValue("@type_of_purchased", "Down Payment");
+                        cm.Parameters.AddWithValue("@date_of_payment", DateTime.Now);
                         cm.Parameters.AddWithValue("@client", txtCustomer.Text);
                         cm.ExecuteNonQuery();
                         cn.Close();

@@ -23,10 +23,15 @@ namespace OOP_System
         private Boolean showPanelDownPayment = false;
         private Boolean showPanelProduct = false;
 
+        private DBConnection dbConnection;
+
+
         public mj_mainForm()
         {
             InitializeComponent();
             random = new Random();
+
+            dbConnection = new DBConnection();
         }
 
         //public void togglePanels()
@@ -140,6 +145,8 @@ namespace OOP_System
 
         private void mj_mainForm_Load(object sender, EventArgs e)
         {
+
+            
             main_panel.Controls.Clear();
             GetDashboard();
             //togglePanels();
